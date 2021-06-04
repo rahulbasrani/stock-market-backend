@@ -42,7 +42,7 @@ router.post("/register", async (req, res) => {
         confirmPassword,
       });
       const tokenSignup = await user.generateVerificationToken();
-      const url = `http://localhost:3000/email-authentication?token=${tokenSignup}&email=${email}`;
+      const url = `https://stock-market-rahulbasrani.herokuapp.com/email-authentication?token=${tokenSignup}&email=${email}`;
       let mailOptions = {
         from: process.env.EMAIL_SENDER,
         to: `${email}`,
@@ -95,7 +95,7 @@ router.post("/signin", async (req, res) => {
           res.status(201).send(req.rootUser);
         } else {
           const tokenSignup = await userLogin.generateVerificationToken();
-          const url = `http://localhost:3000/email-authentication?token=${tokenSignup}&email=${email}`;
+          const url = `https://stock-market-rahulbasrani.herokuapp.com/email-authentication?token=${tokenSignup}&email=${email}`;
           let mailOptions = {
             from: process.env.EMAIL_SENDER,
             to: `${email}`,
@@ -150,7 +150,7 @@ router.post("/resend_email", async (req, res) => {
     const userVerify = await User.findOne({ email: email });
     if (userVerify) {
       const updatedToken = await userVerify.resendEmailToken();
-      const url = `http://localhost:3000/email-authentication?token=${updatedToken}&email=${email}`;
+      const url = `https://stock-market-rahulbasrani.herokuapp.com/email-authentication?token=${updatedToken}&email=${email}`;
       let mailOptions = {
         from: process.env.EMAIL_SENDER,
         to: `${email}`,
@@ -183,7 +183,7 @@ router.post("/forgot_password", async (req, res) => {
     if (userVerify) {
       const updatedToken = await userVerify.forgotPasswordToken();
 
-      const url = `http://localhost:3000/reset-password?token=${updatedToken}&email=${email}`;
+      const url = `https://stock-market-rahulbasrani.herokuapp.com/reset-password?token=${updatedToken}&email=${email}`;
       let mailOptions = {
         from: process.env.EMAIL_SENDER,
         to: `${email}`,
